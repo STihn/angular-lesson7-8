@@ -1,0 +1,24 @@
+<form [formGroup]="lessons" class="form">
+  <ul formArrayName="rows" class="table">
+    <input type="text" value="№" disabled/>
+    <input type="text" value="Дата урока" disabled/>
+    <input type="text" value="Тема урока" disabled/>
+    <input type="text" value="Домашнее задание" disabled/>
+    <input type="text" value="Примечание" disabled class="margin-bottom"/>
+    <li *ngFor="let row of rows.controls; let i = index" [formGroupName]="i" class="lists">
+        <input type="number" [value]="i+1" disabled required/>
+        <input type="date" formControlName="date" required>
+        <span *ngIf="(row.controls['date'].touched || row.controls['date'].dirty)  && row.controls['date'].valid">&#9989;</span>
+        <span *ngIf="(row.controls['date'].touched || row.controls['date'].dirty) && row.controls['date'].invalid">&#10060;</span>
+        <input type="text" formControlName="theme" required>
+        <span  *ngIf="(row.controls['theme'].touched || row.controls['theme'].dirty)  && row.controls['theme'].valid">&#9989;</span>
+        <span *ngIf="(row.controls['theme'].touched || row.controls['theme'].dirty)  && row.controls['theme'].invalid">&#10060;</span>
+        <input type="text" formControlName="homework" required>
+        <span *ngIf="(row.controls['homework'].touched || row.controls['homework'].dirty)  && row.controls['homework'].valid">&#9989;</span>
+        <span *ngIf="(row.controls['homework'].touched || row.controls['homework'].dirty)  && row.controls['homework'].invalid">&#10060;</span>
+        <input type="text" formControlName="note">
+        <button type="button" (click)="remoute(i)">remoute</button>
+        <button type="button" (click)="insert(i+1)">add</button>
+    </li>
+  </ul>
+</form>

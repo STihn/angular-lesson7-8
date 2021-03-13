@@ -1,0 +1,14 @@
+<form [formGroup]="students" class="form">
+  <ul formArrayName="rowsStudent" class="table">
+    <input type="text" value="№" disabled/>
+    <input type="text" value="ФИО" disabled class="margin-bottom"/>
+    <li *ngFor="let stud of rowsStudent['controls']; let i = index" [formGroupName]="i" class="lists">
+        <input type="number" [value]="i+1" disabled/>
+        <input type="text" formControlName="fio" required>
+        <span *ngIf="(stud.controls['fio'].touched || stud.controls['fio'].dirty)  && stud.controls['fio'].valid">&#9989;</span>
+        <span *ngIf="(stud.controls['fio'].touched || stud.controls['fio'].dirty)  && stud.controls['fio'].invalid">&#10060;</span>
+        <button type="button" (click)="remoute(i)">remoute</button>
+        <button type="button" (click)="insert(i+1)">add</button>
+    </li>
+  </ul>
+</form>
